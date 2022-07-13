@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Faustina&family=IBM+Plex+Mono:wght@200;300&family=Poppins&family=Roboto+Mono:wght@200&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto Mono", monospace;
+}
+
+body {
+    background-color: #202124;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    align-items: flex-end;
+    height: 20%;
+    justify-content: center;
+    gap: 20px;
+}
+
+.text {
+    height: 80%;
+}
+
+.switch-box {
+    &__switch {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+    }
+    &__label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 40px; //size
+        height: 20px; //size
+        background: grey;
+        display: block;
+        border-radius: 90px;
+        position: relative;
+    }
+    &__label:after {
+        content: "";
+        position: absolute;
+        top: 1px; //size
+        left: 1px; //size
+        width: 18px; //size
+        height: 18px; //size
+        background: #fff;
+        border-radius: 90px;
+        transition: 0.3s;
+    }
+    &__switch:checked + &__label {
+        background: #grey;
+    }
+    &__switch:checked + &__label:after {
+        left: calc(100% - 1px); //size
+        transform: translateX(-100%);
+    }
+    &__label:active:after {
+        width: 30px;
+    }
+}
