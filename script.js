@@ -24,45 +24,46 @@ const morseCodeKey = {
     X: "-..-",
     Y: "-.--",
     Z: "--..",
-    " ": "/",
+    " ": " / ",
 };
 
 const output = document.querySelector(".output");
 const inputText = document.querySelector(".input");
+const buttonBox = document.querySelector(".button-box");
+const morseButtons = document.querySelectorAll(".button-box__button");
 let toggle = false;
-let input = "";
 
 document.getElementById("switch").addEventListener("change", (event) => {
     toggle = event.target.checked;
     output.classList.toggle("output--bold");
-    input = "";
+    buttonBox.classList.toggle("button-box--hiding");
     inputText.value = "";
     output.innerText = "";
     console.log(toggle);
 });
 
+//reads the input
 inputText.addEventListener("input", (event) => {
     console.log(event.target.value);
     //need to only allow certain inputs
     if (!toggle) {
         event.target.value = event.target.value.replace(/[^a-zA-Z' ]/, "");
-        console.log(input);
-        updateDom(output, translate(event.target.value, morseCodeKey));
+        updateDom(output, translate(event.target.value, morseCodeKey, toggle));
     } else {
         event.target.value = event.target.value.replace(/[^-/. ]/, "");
-        input = event.target.value;
+        updateDom(output, translate(event.target.value, morseCodeKey, toggle));
     }
 });
 
-document.addEventListener("keypress", (event) => {
-    if ((event.code === "Space" || event.code === "Backspace") && toggle) {
-        updateDom(output, translate(input, morseCodeKey));
-        console.log("am i working");
-    }
+morseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        inputText.value += button.value;
+        updateDom(output, translate(inputText.value, morseCodeKey, toggle));
+    });
 });
 
-const translate = (toTranslate, referenceArray) => {
-    if (!toggle) {
+const translate = (toTranslate, referenceArray, bool) => {
+    if (!bool) {
         const arr = toTranslate.toUpperCase().split("");
         return arr.map((char) => referenceArray[char]).join(" ");
     } else {

@@ -112,6 +112,7 @@ body {
 
 .output {
     width: 80vw;
+    height: 45vh;
     font-size: 24px;
     text-align: left;
     padding: 20px;
@@ -123,7 +124,10 @@ body {
 }
 
 .button-box {
-    padding: 12px;
+    padding: 20px;
+    &--hiding {
+        display: none;
+    }
     &__button {
         display: inline-block;
         padding: 15px;
@@ -141,5 +145,11 @@ body {
     &__button:hover {
         color: #8e9100;
         border-color: $primary;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .button-box {
+        order: 1;
     }
 }
