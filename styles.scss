@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Faustina&family=IBM+Plex+Mono:wght@200;300&family=Poppins&family=Roboto+Mono:wght@200&display=swap");
 
-$primary: #404108;
-$secondary: #41420050;
-$white: #fff;
-$gray: #9b9b9b;
-
 * {
     box-sizing: border-box;
     padding: 0;
@@ -13,13 +8,19 @@ $gray: #9b9b9b;
 }
 
 body {
-    background-color: #202124;
+    background: rgb(32, 33, 36);
+    background: radial-gradient(
+        circle,
+        rgba(32, 33, 36, 1) 0%,
+        rgba(13, 13, 14, 1) 100%
+    );
+
     color: whitesmoke;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .container {
@@ -29,6 +30,7 @@ body {
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
+    margin-top: 150px;
 
     &__label {
         width: 97px;
@@ -75,36 +77,18 @@ body {
     }
 }
 
-//Input
-
 .input {
     font-family: inherit;
     width: 80vw;
     border: 0;
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid #9b9b9b;
     outline: 0;
     font-size: 1.3rem;
-    color: $white;
-    padding: 7px 0;
+    color: #fff;
+    padding: 10px;
     background: transparent;
     text-align: center;
 }
-
-.input:focus {
-    padding-bottom: 6px;
-    border-width: 3px;
-    border-image: linear-gradient(to right, $primary, $secondary);
-    border-image-slice: 1;
-}
-
-.input {
-    &:required,
-    &:invalid {
-        box-shadow: none;
-    }
-}
-
-//
 
 .text {
     height: 80%;
@@ -112,44 +96,89 @@ body {
 
 .output {
     width: 80vw;
-    height: 45vh;
-    font-size: 24px;
+    min-height: 45vh;
+    font-size: 32px;
     text-align: left;
     padding: 20px;
     overflow-wrap: break-word;
+    height: fit-content;
 
     &--bold {
         font-weight: 900;
+        font-size: 24px;
     }
 }
 
 .button-box {
-    padding: 20px;
+    margin: 15px;
+    padding: 5px;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+
     &--hiding {
-        display: none;
+        opacity: 0;
+        height: 0px;
+        transition: opacity 0.2s ease-in;
     }
+
     &__button {
+        width: 50px;
         display: inline-block;
         padding: 15px;
         border: 0.16em solid #ffffff;
         margin: 0 0.3em 0.3em 0;
         box-sizing: border-box;
         text-decoration: none;
-        font-weight: 400;
-        background-color: transparent;
+        font-weight: 900;
         color: #ffffff;
         text-align: center;
         transition: all 0.15s;
         font-weight: 900;
+        background: rgb(32, 33, 36);
+        background: radial-gradient(
+            circle,
+            rgba(32, 33, 36, 1) 0%,
+            rgba(13, 13, 14, 1) 100%
+        );
+        box-shadow: 0 0 10px 2px rgb(13, 13, 14);
     }
+
     &__button:hover {
         color: #8e9100;
-        border-color: $primary;
+        border-color: #404108;
     }
+
+    &__button:active {
+        transform: scale(0.9);
+        transition: all (0.1s);
+        border-color: #8e9100;
+    }
+}
+
+.button-active {
+    transform: scale(0.9);
+    transition: all (0.1s);
+    border-color: #8e9100;
 }
 
 @media only screen and (max-width: 600px) {
     .button-box {
         order: 1;
+        position: sticky;
+        bottom: 110px;
+
+        &__button {
+            // color: whitesmoke;
+            background: rgb(32, 33, 36);
+            background: radial-gradient(
+                circle,
+                rgba(32, 33, 36, 1) 0%,
+                rgba(13, 13, 14, 1) 100%
+            );
+            box-shadow: 0 0 10px 2px rgb(13, 13, 14);
+        }
+    }
+    .container {
+        margin-top: 100px;
     }
 }
