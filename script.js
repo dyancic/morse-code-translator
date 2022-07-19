@@ -1,3 +1,5 @@
+import { updateDom, translate } from "./functions.js";
+
 const morseCodeKey = {
     A: ".-",
     B: "-...",
@@ -66,10 +68,16 @@ inputText.addEventListener("input", (event) => {
     let input = event.target.value;
     if (!toggle) {
         event.target.value = input.replace(/[^0-9a-zA-Z' ]/, "");
-        updateDom(output, translate(event.target.value, morseCodeKey, toggle));
+        updateDom(
+            ".output",
+            translate(event.target.value, morseCodeKey, toggle),
+        );
     } else {
         event.target.value = input.replace(/[^-./ ]/, "");
-        updateDom(output, translate(event.target.value, morseCodeKey, toggle));
+        updateDom(
+            ".output",
+            translate(event.target.value, morseCodeKey, toggle),
+        );
     }
 });
 
@@ -83,7 +91,7 @@ morseButtons.forEach((button) => {
             ? (inputText.value = inputText.value.slice(0, -1))
             : (inputText.value += button.value);
         inputText.scrollLeft = inputText.scrollWidth;
-        updateDom(output, translate(inputText.value, morseCodeKey, toggle));
+        updateDom(".output", translate(inputText.value, morseCodeKey, toggle));
         if (!audio) return;
         audio.currentTime = 0;
         audio.play();
@@ -108,22 +116,22 @@ window.addEventListener("keydown", (event) => {
     audio.play();
 });
 
-const translate = (toTranslate, referenceArray, bool) => {
-    if (!bool) {
-        const arr = toTranslate.toUpperCase().split("");
-        return arr.map((char) => referenceArray[char]).join(" ");
-    } else {
-        const arr = toTranslate.split(" ");
-        return arr
-            .map((morse) => {
-                return Object.keys(referenceArray).find(
-                    (key) => referenceArray[key] === morse,
-                );
-            })
-            .join("");
-    }
-};
+// const translate = (toTranslate, referenceArray, bool) => {
+//     if (!bool) {
+//         const arr = toTranslate.split("");
+//         return arr.map((char) => referenceArray[char.toUpperCase()]).join(" ");
+//     } else {
+//         const arr = toTranslate.split(" ");
+//         return arr
+//             .map((morse) => {
+//                 return Object.keys(referenceArray).find(
+//                     (key) => referenceArray[key] === morse,
+//                 );
+//             })
+//             .join("");
+//     }
+// };
 
-const updateDom = (element, value) => {
-    element.innerText = value;
-};
+// const updateDom = (element, value) => {
+//     element.innerText = value;
+// };
