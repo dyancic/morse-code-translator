@@ -1,43 +1,5 @@
 import { updateDom, translate } from "./functions.js";
-
-const morseCodeKey = {
-    A: ".-",
-    B: "-...",
-    C: "-.-.",
-    D: "-..",
-    E: ".",
-    F: "..-.",
-    G: "--.",
-    H: "....",
-    I: "..",
-    J: ".---",
-    K: "-.-",
-    L: ".-..",
-    M: "--",
-    N: "-.",
-    O: "---",
-    P: ".--.",
-    Q: "--.-",
-    R: ".-.",
-    S: "...",
-    T: "-",
-    U: "..-",
-    W: ".--",
-    X: "-..-",
-    Y: "-.--",
-    Z: "--..",
-    " ": "/",
-    1: ".----",
-    2: "..---",
-    3: "...--",
-    4: "....-",
-    5: ".....",
-    6: "-....",
-    7: "--...",
-    8: "---..",
-    9: "----.",
-    0: "-----",
-};
+import morseCodeKey from "./data.js";
 
 const output = document.querySelector(".output");
 const inputText = document.querySelector(".input");
@@ -100,9 +62,11 @@ morseButtons.forEach((button) => {
 
 window.addEventListener("keydown", (event) => {
     inputText.focus();
+
     if (!toggle) return;
     const audio = document.querySelector(`audio[value="${event.key}"]`);
     const button = document.querySelector(`button[value="${event.key}"]`);
+
     if (button) {
         button.classList.add("button-active");
         morseButtons.forEach((key) => {
@@ -111,27 +75,8 @@ window.addEventListener("keydown", (event) => {
             });
         });
     }
+
     if (!audio) return;
     audio.currentTime = 0;
     audio.play();
 });
-
-// const translate = (toTranslate, referenceArray, bool) => {
-//     if (!bool) {
-//         const arr = toTranslate.split("");
-//         return arr.map((char) => referenceArray[char.toUpperCase()]).join(" ");
-//     } else {
-//         const arr = toTranslate.split(" ");
-//         return arr
-//             .map((morse) => {
-//                 return Object.keys(referenceArray).find(
-//                     (key) => referenceArray[key] === morse,
-//                 );
-//             })
-//             .join("");
-//     }
-// };
-
-// const updateDom = (element, value) => {
-//     element.innerText = value;
-// };
